@@ -1,45 +1,24 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import React, { useState } from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import { useAuth } from "./context/auth-context";
+import Login from '@/pages/login';
+import { routerConfig } from "@/config/index";
+import "./App.css";
+function Layout() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    <HashRouter>
+      <Switch>
+        {routerConfig.routes.map((route) => {
+          return <Route key={route.path} {...route} />;
+        })}
+      </Switch>
+    </HashRouter>
+  );
+}
+function App() {
+  const { user } = useAuth();
+  console.log("user:", user);
+  return user?.token ?  <Layout/> : <Login />;
 }
 
-export default App
+export default App;
