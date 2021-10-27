@@ -5,9 +5,9 @@ import "./index.less";
 function Login() {
   const { login } = useAuth();
   useEffect(() => {
-    Api.getDemo().then((res) => {
-      console.log("res1:", res);
-    });
+    // Api.getDemo().then((res) => {
+    //   console.log("res1:", res);
+    // });
   });
   const handleLogin = () => {
     login({ username: "xiao", password: "123" });
