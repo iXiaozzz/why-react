@@ -2431,6 +2431,11 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
+postcss-flexbugs-fixes@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmmirror.com/postcss-flexbugs-fixes/download/postcss-flexbugs-fixes-5.0.2.tgz#2028e145313074fc9abe276cb7ca14e5401eb49d"
+  integrity sha1-ICjhRTEwdPyavidst8oU5UAetJ0=
+
 postcss-html@^0.36.0:
   version "0.36.0"
   resolved "https://registry.npmmirror.com/postcss-html/download/postcss-html-0.36.0.tgz?cache=0&sync_timestamp=1634624648401&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fpostcss-html%2Fdownload%2Fpostcss-html-0.36.0.tgz#b40913f94eaacc2453fd30a1327ad6ee1f88b204"
