@@ -13,7 +13,7 @@ function Home() {
   return (
     <div className={styles.homeContainer}>
       <div className={styles.headerCard}>
-        <Header show updateShow={setShow} />
+        <Header show={show} updateShow={setShow} />
       </div>
       <div>{show ? "hello world" : "no hello"}</div>
       <p>

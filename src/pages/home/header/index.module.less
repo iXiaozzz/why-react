@@ -1,11 +1,48 @@
 @import url("@/styles/mixins.less");
+
 .header-container {
   .flex(space-between);
   height: 120px;
-  > li:first-of-type {
+
+  >li:first-of-type {
     font-weight: bold;
-    > i {
+
+    >.day {
       font-size: 75px;
+    }
+
+    >.date {
+      display: inline-block;
+      position: relative;
+
+      >i {
+        @c: 14px;
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-right: @c solid transparent;
+        border-left: @c solid transparent;
+        border-top: @c solid transparent;
+        border-bottom: @c+6px solid #333;
+        position: absolute;
+        top: 0;
+        bottom: 6px;
+        right: -2*@c - 5px;
+        margin: auto;
+        // transform: rotate(180deg);
+        transform-origin: 50% 75%;
+        transition: transform 0.5s;
+
+        &.rotate1 {
+          transform: rotate(180deg)
+        }
+
+        &.rotate2 {
+          transform: rotate(360deg)
+        }
+
+      }
     }
   }
 }
