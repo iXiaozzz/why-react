@@ -1,0 +1,20 @@
+.flex(@jc: center, @ai: center, @dir: row) {
+  display: flex;
+  justify-content: @jc;
+  align-items: @ai;
+  flex-direction: @dir;
+}
+
+.multi-lineTextOverflow(@lineNum) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: @lineNum;
+  -webkit-box-orient: vertical;
+}
+
+.signle-lineTextOverflow() {
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

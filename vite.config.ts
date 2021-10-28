@@ -46,7 +46,7 @@ export default defineConfig({
     modules: {
       scopeBehaviour: "local",
       localsConvention: "camelCase",
-      generateScopedName: "[name]__[local]__[hash:base64:8]",
+      generateScopedName: "[path][name]__[local]__[hash:base64:8]",
     },
     preprocessorOptions: {
       less: {
