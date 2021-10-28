@@ -8,22 +8,23 @@ export default defineConfig({
   plugins: [
     reactRefresh(),
     vitePluginImp({
-      onlyBuild: false,
-      babelImportPluginOptions: [
-        {
-          libraryName: "antd-mobile",
-          libraryDirectory: "es",
-          style: true,
-        },
-      ],
-      // libList: [
+      // onlyBuild: false,
+      // babelImportPluginOptions: [
       //   {
-      //     libName: "antd-mobile",
-      //     style(name) {
-      //       return `antd-mobile/lib/${name}/style/index.css`;
-      //     },
+      //     libraryName: "antd-mobile",
+      //     libraryDirectory: "es",
+      //     style: true,
       //   },
       // ],
+      libList: [
+        {
+          libName: "antd-mobile",
+          // libDirectory:'es',
+          style(name) {
+            return `antd-mobile/es/components/${name}/`;
+          },
+        },
+      ],
     }),
   ],
   resolve: {
