@@ -27,7 +27,7 @@ const transitionStyles = {
 interface iProps {
   show: boolean;
 }
-export default function (props: iProps) {
+const CardList = (props: iProps)=>{
   const { show } = props;
   const nodeRef = React.useRef(null);
   return (
@@ -47,3 +47,6 @@ export default function (props: iProps) {
     </>
   );
 }
+const conditionalRender=(prevProps:iProps, nextProps:iProps):boolean=>prevProps.show===nextProps.show
+export default React.memo(CardList,conditionalRender)
+ 

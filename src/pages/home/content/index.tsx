@@ -1,50 +1,39 @@
-import React, { useRef, useState } from "react";
-import { Swiper } from "antd-mobile";
+import React, { createRef, useRef, useState } from "react";
+import { Virtual, Swiper } from 'swiper';
+import { Swiper as Oswiper, SwiperSlide } from 'swiper/react';
 import Main from "./Main";
+import 'swiper/css'
+import 'swiper/css/virtual'
 import styles from "./index.module.less";
-import { SwiperRef } from "antd-mobile/es/components/swiper";
 
 interface IProps {
-  list: number[];
-  updateIndexChange?: (index: number) => void;
-  swiperLeft?: (index: number) => void
-  swiperRight?: (index: number) => void
+  list: number[]
 }
+const ContentIndex = (props: IProps) => {
+  const { list } = props
+  const [swiperRef, setSwiperRef] = useState<Swiper | null>(null)
+  const hanleSwiper = (swiper: any) => {
+    setSwiperRef(swiper)
+  }
+  const handleSlideChange = (swiper: any) => {
+    // console.log('change:',swiper);
+  }
 
-export default function (props: IProps) {
-  const { list, updateIndexChange, swiperLeft, swiperRight} = props;
-  const ref = useRef<SwiperRef>(null);
-  const [preIndex, setPreIndex] = useState(0);
-  const [curIndex, setCurIndex] = useState(0);
-
-  const onIndexChange = (curIndex: number) => {
-    if (preIndex < curIndex) {
-        swiperLeft &&  swiperLeft(curIndex)
-        console.log(curIndex)
-        // ref.current?.swipeTo(0)
-    } else if (preIndex > curIndex) {
-        swiperRight && swiperRight(curIndex)
-        // ref.current?.swipeTo(0)
-    }   
-    setPreIndex(curIndex)
-    updateIndexChange && updateIndexChange(curIndex)
-  };
+  const handleClick = () => {
+    swiperRef && swiperRef?.slideTo(3, 500, true)
+  }
   return (
     <div className={styles.swiperContainer}>
-      <Swiper
-        allowTouchMove={true}
-        ref={ref}
-        loop={false}
-        style={{ "--height": "100%" }}
-        defaultIndex={curIndex}
-        onIndexChange={onIndexChange}
-      >
-        {list.map((item) => (
-          <Swiper.Item key={item}>
-            <Main value={item} />
-          </Swiper.Item>
-        ))}
-      </Swiper>
+      <Oswiper style={{ height: '100%' }} modules={[Virtual]} spaceBetween={0} slidesPerView={1} onSwiper={hanleSwiper} onSlideChange={handleSlideChange} watchSlidesProgress virtual>
+        {
+          list.map((item, index) => (
+            <SwiperSlide key={index} virtualIndex={index}>
+              <Main value={item} />
+            </SwiperSlide>
+          ))
+        }
+      </Oswiper>
     </div>
   );
 }
+export default React.memo(ContentIndex)

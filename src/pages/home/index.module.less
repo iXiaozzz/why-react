@@ -1,11 +1,19 @@
 @import url("@/styles/mixins.less");
+
 .home-container {
   height: 100%;
-  // .flex(center, flex-start, column);
   display: flex;
   flex-direction: column;
-  
+  position: relative;
+  padding-top: 120px;
+
   .header-card {
     padding: 0 40px;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
   }
 }
