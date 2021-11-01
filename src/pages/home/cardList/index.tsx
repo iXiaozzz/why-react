@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./index.module.less";
 import { Transition } from "react-transition-group";
-import { px2rem } from "@/utils";
+import { px2rem, randomHexColor } from "@/utils";
+import CardItem from "./CardItem";
 
 const DURATION = 0.15 * 1000;
 const defaultStyle = {
@@ -24,12 +25,51 @@ const transitionStyles = {
     opacity: 0,
   },
 };
-interface iProps {
+interface IProps {
   show: boolean;
 }
-const CardList = (props: iProps)=>{
+export interface IList {
+  title: string;
+  data: IData[];
+}
+export interface IData {
+  id: number,
+  img: string;
+  date: string;
+}
+function mockData(month: number = 3, size: number = 13) {
+  let arr: IList[] = [];
+  let count: number = 1
+
+  for (let i = 0; i < month; i++) {
+    let key = i + 1 + "";
+    let obj: IList = {
+      title: "",
+      data: [],
+    };
+    obj.title = key;
+    for (let j = 0; j < size; j++) {
+      obj.data.push({
+        id: count++,
+        img: randomHexColor(),
+        date: j + "",
+      });
+    }
+    arr.push(obj);
+  }
+  return arr;
+}
+
+function CardList(props: IProps) {
   const { show } = props;
   const nodeRef = React.useRef(null);
+  const [list, setList] = useState<IList[]>([]);
+
+  useEffect(() => {
+    let res = mockData(3, 13);
+    setList(res);
+  }, [show]);
+
   return (
     <>
       <Transition in={show} timeout={DURATION} nodeRef={nodeRef}>
@@ -40,13 +80,23 @@ const CardList = (props: iProps)=>{
             className={styles.cardListContainer}
             style={{ ...defaultStyle, ...transitionStyles[state] }}
           >
-            this is Card List. ({state})
+            {list?.map((item, index) => {
+              return (
+                <CardItem
+                  key={index}
+                  header={<span>{item.title}月</span>}
+                  content={null}
+                  list={item?.data}
+                />
+              );
+            })}
           </div>
         )}
       </Transition>
     </>
   );
 }
-const conditionalRender=(prevProps:iProps, nextProps:iProps):boolean=>prevProps.show===nextProps.show
-export default React.memo(CardList,conditionalRender)
- 
+export default React.memo(
+  CardList,
+  (prevProp, nextProp) => prevProp.show === nextProp.show
+);
