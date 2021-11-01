@@ -1,10 +1,37 @@
+@import url("@/styles/mixins.less");
 .card-list-container {
   position: absolute;
   top: -100%;
   left: 0;
   width: 100%;
-  height: calc(100vh - 290px);
+  height: calc(100% - 120px);
   overflow-y: scroll;
   z-index: 1;
-  background-color: red;
+  background-color: #fff;
+  padding: 0 20px;
+}
+.card-item {
+  .title-box {
+    padding: 0 20%;
+  }
+  .content-box {
+    .flex(flex-start,flex-start, row);
+    flex-wrap: wrap;
+    .card {
+      // flex: 1;
+      width: 46%;
+      &:nth-of-type(2n + 1) {
+        margin-right: 8%;
+      }
+      .img-box {
+        height: 300px;
+      }
+      .date {
+        height: 120px;
+        line-height: 120px;
+        text-align: center;
+        font-size: 50px;
+      }
+    }
+  }
 }

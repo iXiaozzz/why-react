@@ -1,26 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { List } from "antd-mobile";
+import { randomHexColor } from "@/utils";
 import styles from "./index.module.less";
-interface iProps {
-  value: number | string;
+interface IProps {
+  value?: number | string;
+  data?: any[];
 }
-function randomHexColor() {
-  //随机生成十六进制颜色
-  var hex = Math.floor(Math.random() * 16777216).toString(16); //生成ffffff以内16进制数
-  while (hex.length < 6) {
-    //while循环判断hex位数，少于6位前面加0凑够6位
-    hex = "0" + hex;
-  }
-  return "#" + hex; //返回‘#'开头16进制颜色
-}
-export default function (props: iProps) {
-  const { value } = props;
 
+export default function (props: IProps) {
+  const { data } = props;
   return (
-    <div
-      className={styles.mainItem}
-      style={{ backgroundColor: randomHexColor() }}
-    >
-      {value}
-    </div>
+    <List>
+      {data?.map((item) => (
+        <List.Item key={item}>{item}</List.Item>
+      ))}
+    </List>
   );
 }
