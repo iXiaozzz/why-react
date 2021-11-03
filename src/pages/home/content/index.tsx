@@ -28,7 +28,7 @@ const ContentIndex = (props: IProps) => {
   const [data, setData] = useState(() => getNextData());
   const context = useContext(homeContext)
   const currentSwiperIndex = context?.currentSwiperIndex || 1
-  const swiperContainerRef = useRef(null)
+  const swiperContainerRef = useRef<HTMLDivElement>(null)
   const handleSwiper = (swiper: Swiper) => {
     setSwiperRef(swiper)
   }
@@ -47,8 +47,9 @@ const ContentIndex = (props: IProps) => {
     setData([...getNextData(), ...data]);
   };
   const handleBackToTop = () => {
-    console.log('swiperContainer:', swiperContainerRef)
-    // swiperContainerRef.current && swiperContainerRef.current.scrollTo(0)
+    if (swiperContainerRef && swiperContainerRef.current) {
+      swiperContainerRef.current.scrollTop = 0
+    }
   }
   return (
     <div ref={swiperContainerRef} className={styles.swiperContainer}>

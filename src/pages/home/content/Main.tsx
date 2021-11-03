@@ -12,7 +12,7 @@ export default function (props: IProps) {
   const listRef = useRef(null)
 
   useEffect(() => {
-    console.log('listRef:', listRef);
+    // console.log('listRef:', listRef);
   }, [value])
 
   return (
