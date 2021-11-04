@@ -25,7 +25,7 @@ interface IProps {
 }
 function CardItem(props: IProps) {
   const { list } = props;
-  console.log("props.list:", list);
+  // console.log("props.list:", list);
 
   return (
     <div className={styles.cardItem}>
@@ -48,4 +48,4 @@ function CardItem(props: IProps) {
     </div>
   );
 }
-export default React.memo(CardItem);
+export default React.memo(CardItem, (prevProp, nextProp) => prevProp.list?.length === nextProp.list?.length);

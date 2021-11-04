@@ -1,21 +1,29 @@
 @import url("@/styles/mixins.less");
 
 .header-container {
-  .flex(space-between);
+  .flex(flex-start);
   height: 120px;
+  overflow: hidden;
 
-  > li:first-of-type {
+  >div:first-of-type {
+    flex: 1;
     font-weight: bold;
+    .flex(flex-start, baseline);
 
-    > .day {
-      font-size: 75px;
+    .ib {
+      display: inline-block;
     }
 
-    > .date {
+    >.day {
+      font-size: 75px;
+      height: 80px;
+    }
+
+    >.date {
       display: inline-block;
       position: relative;
 
-      > i {
+      >i {
         @c: 14px;
         content: "";
         display: inline-block;
