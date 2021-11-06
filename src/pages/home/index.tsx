@@ -7,7 +7,7 @@ import { Loading } from "antd-mobile";
 import styles from "./index.module.less";
 const CardList = React.lazy(() => import("./cardList"));
 import Content from "./content";
-import { homeContext } from '@/context';
+import { homeContext } from "@/context";
 const mockData = (size: number): number[] => {
   let arr = [];
   for (let i = 0; i < size; i++) {
@@ -19,21 +19,28 @@ const mockData = (size: number): number[] => {
 function Home() {
   const history = useHistory();
   const [show, setShow] = useState(false);
-  const [currentSwiperIndex, setCurrentSwiperIndex] = useState(1)
+  const [currentSwiperIndex, setCurrentSwiperIndex] = useState(1);
   const list = mockData(2000);
   const [swiperList, setSwiperList] = useState(list);
 
-
   const handleCloseCardList = (index: number) => {
-    setShow(false)
-    setCurrentSwiperIndex(index)
-  }
+    setShow(false);
+    setCurrentSwiperIndex(index);
+  };
   useEffect(() => {
     console.log("parent show:", show);
   }, [show]);
 
   return (
-    <homeContext.Provider value={{ show, setShow, currentSwiperIndex, setCurrentSwiperIndex, handleCloseCardList }}>
+    <homeContext.Provider
+      value={{
+        show,
+        setShow,
+        currentSwiperIndex,
+        setCurrentSwiperIndex,
+        handleCloseCardList,
+      }}
+    >
       <div className={styles.homeContainer}>
         <div className={styles.headerCardContainer}>
           <div className={styles.headerCard}>

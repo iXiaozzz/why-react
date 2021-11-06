@@ -20,12 +20,20 @@
     }
 
     >.date {
-      display: inline-block;
       position: relative;
 
-      >i {
+      display: flex;
+      justify-content: flex-start;
+      align-items: baseline;
+
+      >div {
+        height: 50px;
+        width: 75px;
+        overflow-y: hidden;
+      }
+
+      .triangle {
         @c: 14px;
-        content: "";
         display: inline-block;
         width: 0;
         height: 0;
@@ -35,10 +43,10 @@
         border-bottom: @c+6px solid #333;
         position: absolute;
         top: 0;
-        bottom: 6px;
+        bottom: 10px;
+        z-index: 99;
         right: -2 * @c - 5px;
         margin: auto;
-        // transform: rotate(180deg);
         transform-origin: 50% 75%;
         transition: transform 0.5s;
 

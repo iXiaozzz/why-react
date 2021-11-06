@@ -1,14 +1,19 @@
-import React, { createRef, useContext, useEffect, useRef, useState } from "react";
-import { Virtual, Swiper } from 'swiper';
-import { Swiper as Oswiper, SwiperSlide } from 'swiper/react';
+import React, {
+  createRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { Virtual, Swiper } from "swiper";
+import { Swiper as Oswiper, SwiperSlide } from "swiper/react";
 import { PullToRefresh, List } from "antd-mobile";
 import { sleep } from "antd-mobile/es/utils/sleep";
 import Main from "./Main";
-import 'swiper/css'
-import 'swiper/css/virtual'
+import "swiper/css";
+import "swiper/css/virtual";
 import styles from "./index.module.less";
-import { homeContext } from '@/context';
-
+import { homeContext } from "@/context";
 
 let current = 1;
 function getNextData() {
@@ -20,26 +25,25 @@ function getNextData() {
   return ret;
 }
 interface IProps {
-  list: number[]
+  list: number[];
 }
 const ContentIndex = (props: IProps) => {
-  const { list } = props
-  const [swiperRef, setSwiperRef] = useState<Swiper | null>(null)
+  const { list } = props;
+  const [swiperRef, setSwiperRef] = useState<Swiper | null>(null);
   const [data, setData] = useState(() => getNextData());
-  const context = useContext(homeContext)
-  const currentSwiperIndex = context?.currentSwiperIndex || 1
-  const swiperContainerRef = useRef<HTMLDivElement>(null)
+  const context = useContext(homeContext);
+  const currentSwiperIndex = context?.currentSwiperIndex || 1;
+  const swiperContainerRef = useRef<HTMLDivElement>(null);
   const handleSwiper = (swiper: Swiper) => {
-    setSwiperRef(swiper)
-  }
+    setSwiperRef(swiper);
+  };
   const handleSlideChange = (swiper: Swiper) => {
     // console.log('change:',swiper);
-    handleBackToTop()
-  }
+    handleBackToTop();
+  };
   useEffect(() => {
-    swiperRef?.slideTo(currentSwiperIndex)
-  }, [currentSwiperIndex])
-
+    swiperRef?.slideTo(currentSwiperIndex);
+  }, [currentSwiperIndex]);
 
   const hanleRefresh = async () => {
     console.log("触发下拉刷新");
@@ -48,24 +52,30 @@ const ContentIndex = (props: IProps) => {
   };
   const handleBackToTop = () => {
     if (swiperContainerRef && swiperContainerRef.current) {
-      swiperContainerRef.current.scrollTop = 0
+      swiperContainerRef.current.scrollTop = 0;
     }
-  }
+  };
   return (
     <div ref={swiperContainerRef} className={styles.swiperContainer}>
-      <Oswiper modules={[Virtual]} spaceBetween={0} slidesPerView={1} onSwiper={handleSwiper} onSlideChange={handleSlideChange} watchSlidesProgress virtual>
-        {
-          list.map((item, index) => (
-            <SwiperSlide key={index} virtualIndex={index}>
-              {/* <Main value={item} /> */}
-              <PullToRefresh onRefresh={hanleRefresh}>
-                <Main value={index} data={data} />
-              </PullToRefresh>
-            </SwiperSlide>
-          ))
-        }
+      <Oswiper
+        modules={[Virtual]}
+        spaceBetween={0}
+        slidesPerView={1}
+        onSwiper={handleSwiper}
+        onSlideChange={handleSlideChange}
+        watchSlidesProgress
+        virtual
+      >
+        {list.map((item, index) => (
+          <SwiperSlide key={index} virtualIndex={index}>
+            {/* <Main value={item} /> */}
+            <PullToRefresh onRefresh={hanleRefresh}>
+              <Main value={index} data={data} />
+            </PullToRefresh>
+          </SwiperSlide>
+        ))}
       </Oswiper>
     </div>
   );
-}
-export default React.memo(ContentIndex)
+};
+export default React.memo(ContentIndex);

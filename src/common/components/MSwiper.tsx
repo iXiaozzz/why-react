@@ -1,6 +1,6 @@
-import React from 'react';
-import { Virtual, Swiper } from 'swiper';
-import { Swiper as Oswiper, SwiperSlide } from 'swiper/react';
+import React from "react";
+import { Virtual, Swiper } from "swiper";
+import { Swiper as Oswiper, SwiperSlide } from "swiper/react";
 
 interface IProp {
   data: any[];
@@ -9,26 +9,42 @@ interface IProp {
   spaceBetween?: number;
   slidesPerView?: number;
   allowTouchMove?: boolean;
-  direction?: 'horizontal' | 'vertical'
-  onSwiper?: (swiper: Swiper) => void;
-  onSlideChange?: (swiper: Swiper) => void;
-  [key: string]: any
+  direction?: "horizontal" | "vertical";
+  handleSwiper?: (swiper: Swiper) => void;
+  handleSlideChange?: (swiper: Swiper) => void;
+  [key: string]: any;
 }
 function MSwiper(props: IProp) {
-  const { data, onSwiper, onSlideChange, isVirtual = true, SwiperContent, spaceBetween = 0, slidesPerView = 1, direction = "horizontal", ...restProps } = props
+  const {
+    data,
+    handleSwiper,
+    handleSlideChange,
+    isVirtual = true,
+    SwiperContent,
+    spaceBetween = 0,
+    slidesPerView = 1,
+    direction = "horizontal",
+    ...restProps
+  } = props;
   return (
-    <Oswiper direction={direction} modules={[isVirtual ? Virtual : '']} spaceBetween={spaceBetween} slidesPerView={slidesPerView} onSwiper={onSwiper} onSlideChange={onSlideChange} watchSlidesProgress virtual {...restProps}>
-      {
-        data.map((item, index) => (
-          <SwiperSlide key={index} virtualIndex={index}>
-            {
-              SwiperContent ? SwiperContent : <span>{item}</span>
-            }
-          </SwiperSlide>
-        ))
-      }
+    <Oswiper
+      direction={direction}
+      modules={[isVirtual ? Virtual : ""]}
+      spaceBetween={spaceBetween}
+      slidesPerView={slidesPerView}
+      onSwiper={handleSwiper}
+      onSlideChange={handleSlideChange}
+      watchSlidesProgress
+      virtual
+      {...restProps}
+    >
+      {data.map((item, index) => (
+        <SwiperSlide key={index} virtualIndex={index}>
+          {SwiperContent ? SwiperContent : <span>{item}</span>}
+        </SwiperSlide>
+      ))}
     </Oswiper>
-  )
+  );
 }
 
-export default MSwiper
+export default MSwiper;

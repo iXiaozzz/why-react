@@ -3,14 +3,14 @@ import { Divider, List } from "antd-mobile";
 import styles from "./index.module.less";
 import { IList, IData } from "./index";
 import { px2rem } from "@/utils";
-import { homeContext } from '@/context';
+import { homeContext } from "@/context";
 function Card(props: { data: IData }) {
   const { data } = props;
-  const context = useContext(homeContext)
-  const handleCloseCardList = context?.handleCloseCardList
+  const context = useContext(homeContext);
+  const handleCloseCardList = context?.handleCloseCardList;
   const handleClick = (index: number) => {
-    handleCloseCardList && handleCloseCardList(index)
-  }
+    handleCloseCardList && handleCloseCardList(index);
+  };
   return (
     <div className={styles.card} onClick={() => handleClick(data.id)}>
       <p className={styles.imgBox} style={{ backgroundColor: data?.img }}></p>
@@ -48,4 +48,7 @@ function CardItem(props: IProps) {
     </div>
   );
 }
-export default React.memo(CardItem, (prevProp, nextProp) => prevProp.list?.length === nextProp.list?.length);
+export default React.memo(
+  CardItem,
+  (prevProp, nextProp) => prevProp.list?.length === nextProp.list?.length
+);
