@@ -7,9 +7,10 @@ import { homeContext } from "@/context";
 function Card(props: { data: IData }) {
   const { data } = props;
   const context = useContext(homeContext);
-  const handleCloseCardList = context?.handleCloseCardList;
+
   const handleClick = (index: number) => {
-    handleCloseCardList && handleCloseCardList(index);
+    context?.setCurrentDate(data.date);
+    context?.handleCloseCardList(index);
   };
   return (
     <div className={styles.card} onClick={() => handleClick(data.id)}>
@@ -25,7 +26,6 @@ interface IProps {
 }
 function CardItem(props: IProps) {
   const { list } = props;
-  // console.log("props.list:", list);
 
   return (
     <div className={styles.cardItem}>

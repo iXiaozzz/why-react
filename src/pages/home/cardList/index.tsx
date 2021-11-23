@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.less";
 import { Transition } from "react-transition-group";
-import { px2rem, randomHexColor } from "@/utils";
-import { InfiniteScroll, List } from 'antd-mobile'
-import { sleep } from 'antd-mobile/es/utils/sleep'
+import { px2rem, randomHexColor, createRandomDate } from "@/utils";
+import { InfiniteScroll, List } from "antd-mobile";
+import { sleep } from "antd-mobile/es/utils/sleep";
 import CardItem from "./CardItem";
 
 const DURATION = 0.15 * 1000;
@@ -35,13 +35,13 @@ export interface IList {
   data: IData[];
 }
 export interface IData {
-  id: number,
+  id: number;
   img: string;
   date: string;
 }
 async function mockData(month: number = 3, size: number = 13) {
   let arr: IList[] = [];
-  let count: number = 1
+  let count: number = 1;
   for (let i = 0; i < month; i++) {
     let key = i + 1 + "";
     let obj: IList = {
@@ -53,12 +53,12 @@ async function mockData(month: number = 3, size: number = 13) {
       obj.data.push({
         id: count++,
         img: randomHexColor(),
-        date: j + "",
+        date: createRandomDate(),
       });
     }
     arr.push(obj);
   }
-  await sleep(2000)
+  await sleep(2000);
   return arr;
 }
 
@@ -66,16 +66,16 @@ function CardList(props: IProps) {
   const { show } = props;
   const nodeRef = React.useRef(null);
   const [list, setList] = useState<IList[]>([]);
-  const [hasMore, setHasMore] = useState(true)
-  const [count, setCount] = useState(3)
+  const [hasMore, setHasMore] = useState(true);
+  const [count, setCount] = useState(3);
 
   const loadMore = async () => {
-    console.log('加载更多。。。count:', count);
-    const res = await mockData(2, 31)
-    setList(value => [...value, ...res])
-    setCount(count => --count)
-    setHasMore(count > 0)
-  }
+    console.log("加载更多。。。count:", count);
+    const res = await mockData(2, 31);
+    setList((value) => [...value, ...res]);
+    setCount((count) => --count);
+    setHasMore(count > 0);
+  };
 
   // useEffect(async () => {
   //   let res = await mockData(3, 13);

@@ -38,7 +38,6 @@ const ContentIndex = (props: IProps) => {
     setSwiperRef(swiper);
   };
   const handleSlideChange = (swiper: Swiper) => {
-    // console.log('change:',swiper);
     handleBackToTop();
   };
   useEffect(() => {

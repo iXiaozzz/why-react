@@ -36,7 +36,6 @@ export const cloneDeep: <T extends lengthWish>(data: T) => T = (data) => {
   return result;
 };
 
-
 export function randomHexColor(): string {
   //随机生成十六进制颜色
   var hex = Math.floor(Math.random() * 16777216).toString(16); //生成ffffff以内16进制数
@@ -48,5 +47,25 @@ export function randomHexColor(): string {
 }
 
 export function dealSingleDigits(num: Number): string {
-  return num < 10 ? '0' + num : '' + num
+  return num < 10 ? "0" + num : "" + num;
+}
+
+export function createRandomDate() {
+  let maxDateRandom = Date.now();
+  let minDateRandom = new Date(1970, 0, 1, 8).getTime();
+  let randomDate = getRandom(minDateRandom, maxDateRandom);
+  let dateObj = new Date(randomDate);
+  let [y, m, d]: Array<number | string> = [
+    dateObj.getFullYear(),
+    dateObj.getMonth() + 1,
+    dateObj.getDate(),
+  ];
+  m = m < 10 ? `0${m}` : m;
+  d = d < 10 ? `0${d}` : d;
+  return `${y}/${m}/${d}`;
+}
+export function getRandom(min: number, max: number): number {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

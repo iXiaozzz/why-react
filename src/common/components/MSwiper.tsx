@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Virtual, Swiper } from "swiper";
 import { Swiper as Oswiper, SwiperSlide } from "swiper/react";
 
@@ -24,15 +24,24 @@ function MSwiper(props: IProp) {
     spaceBetween = 0,
     slidesPerView = 1,
     direction = "horizontal",
+    initialSlide,
     ...restProps
   } = props;
+  const [swiperRef, setSwiperRef] = useState<Swiper | null>(null);
+  useEffect(() => {
+    swiperRef?.slideTo(initialSlide);
+  }, [initialSlide]);
+  function onSwiper(Swiper: Swiper) {
+    setSwiperRef(Swiper);
+    handleSwiper && handleSwiper(Swiper);
+  }
   return (
     <Oswiper
       direction={direction}
       modules={[isVirtual ? Virtual : ""]}
       spaceBetween={spaceBetween}
       slidesPerView={slidesPerView}
-      onSwiper={handleSwiper}
+      onSwiper={onSwiper}
       onSlideChange={handleSlideChange}
       watchSlidesProgress
       virtual
