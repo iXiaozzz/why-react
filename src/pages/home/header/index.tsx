@@ -86,7 +86,7 @@ export default function (props: iProps) {
               今天
             </Button>
           ) : (
-            <div>深圳&nbsp;多云&nbsp;25℃</div>
+            <>深圳&nbsp;多云&nbsp;25℃</>
           )}
         </div>
       </div>

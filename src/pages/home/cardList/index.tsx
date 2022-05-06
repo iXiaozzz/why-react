@@ -90,7 +90,10 @@ function CardList(props: IProps) {
           <div
             ref={nodeRef}
             className={styles.cardListContainer}
-            style={{ ...defaultStyle, ...transitionStyles[state] }}
+            style={{
+              ...defaultStyle,
+              ...transitionStyles[state],
+            }}
           >
             {list?.map((item, index) => {
               return (
