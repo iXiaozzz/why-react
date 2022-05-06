@@ -11,7 +11,7 @@ const defaultStyle = {
   transition: `top ${DURATION}ms ease-in-out`,
   top: "-100%",
 };
-const transitionStyles = {
+const transitionStyles: { [key: string]: any } = {
   entering: { top: "-100%", opacity: 0.5 },
   entered: {
     top: px2rem(120),
